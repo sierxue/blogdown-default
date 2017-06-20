@@ -6,7 +6,7 @@ disable_comments: true
 
 ## 联系方式
 
-Email：tedddy@foxmail.com；主页：<http://sierxue.me>；现居住于成都
+Email：tedddy@foxmail.com；主页：<http://sierxue.me>；现隐于蓉城闹市
 
 ## 研究兴趣
 
