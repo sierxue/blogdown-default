@@ -1,0 +1,64 @@
+---
+date: 2017-05-24 7:00:00
+title: "2.1 一个统计学习的数学模型"
+series: [ML]
+categories: [MLF02]
+tags: []
+---
+
+
+
+<div id="3" class="section level3">
+<h3>例3：预测木瓜是否味美</h3>
+<p>想象一下你刚刚抵达太平洋小岛，<!-- more --> 你很快发现木瓜是当地饮食的一个重要组成部分。 但是，你从来没有尝过木瓜。你想通过学习去预测你在市场上看到的木瓜是否可口。 首先，你需要决定你的预测应该基于木瓜的什么<strong>特征</strong> (<em>feature</em>)。 根据你以前吃水果形成的经验，你决定使用两个特征：木瓜的颜色和木瓜的柔软度。 作为<strong>学习者</strong> (<em>learner</em>)的你，可以随机地抽取一些木瓜作为<strong>训练样本</strong> (<em>training sample</em>)， 记录下每一个木瓜的颜色和柔软度，然后试吃以判定木瓜是否美味。 根据这些数据，你可以生成一个<strong>预测规则</strong> (<em>prediction rule</em>)。 我们的第一步，是建立一个数学模型来刻画这样的学习问题。</p>
+</div>
+<div class="section level3">
+<h3>统计学习框架</h3>
+<p>这个统计学习框架 (statistical learning framework)包含四部分： <strong>输入</strong> (<em>input</em>)、<strong>输出</strong> (<em>output</em>)、<strong>数据生成模型</strong> (<em>data-generation model</em>)、 以及<strong>成效</strong> (<em>measure of success</em>)。</p>
+<div class="section level4">
+<h4>学习者的输入</h4>
+<ol style="list-style-type: decimal">
+<li><strong>样本空间</strong> (<em>domain space</em>, or <em>domain set</em>, or <em>instance space</em>)： 一个任意的集合，通常表示为<span class="math inline">\(\mathcal{X}\)</span>，它是我们想要研究的对象的集合。 在上面的例子中，<span class="math inline">\(\mathcal{X}\)</span>就是所有的木瓜的集合。 通常<span class="math inline">\(\mathcal{X}\)</span>中的一个<strong>样本</strong> (<em>sample</em>)，通常表示为一个小写的<span class="math inline">\(x\)</span>， 可以由一个<strong>特征向量</strong> (<em>feature vector</em>)来表示，比如木瓜的颜色和柔软度。 如果用一个值表示颜色，一个值表示柔软度，那么<span class="math inline">\(x\)</span>可以用一个二元数组来表示。 我们也称一个样本为一个<strong>示例</strong> (<em>instance</em>)，<span class="math inline">\(\mathcal{X}\)</span>为<strong>示例空间</strong> (<em>instance space</em>)。</li>
+<li><strong>标记空间</strong> (<em>label space</em> or <em>label set</em>)：通常表示为<span class="math inline">\(\mathcal{Y}\)</span>。 对于本例，<span class="math inline">\(\mathcal{Y}\)</span>为二值集合，通常表示为<span class="math inline">\(\{0,1\}\)</span>：1代表味美，0代表非味美。</li>
+<li><strong>训练数据</strong> (<em>training data</em>, or <em>training example</em>, or <em>training set</em>)：通常表示为 <span class="math display">\[S = \left(\left(x_1,y_1\right),\ldots,\left(x_m,y_m\right)\right)\]</span> 其中，<span class="math inline">\(x_i\)</span>, <span class="math inline">\(i=1,\ldots,m\)</span>，为第<span class="math inline">\(i\)</span>个样本，<span class="math inline">\(y_i\)</span>为对第<span class="math inline">\(i\)</span>个样本所做的标记。 我们称<span class="math inline">\(\left(x_i,y_i\right)\)</span>为第<span class="math inline">\(i\)</span>个<strong>样例</strong>(<em>example</em>)。 简单地说，训练数据就是一组使按顺序排列的样例。 <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+</ol>
+</div>
+<div class="section level4">
+<h4>学习者的输出</h4>
+<p>通过对样例的学习，学习者输出一个预测准则，<span class="math display">\[h: \mathcal{X} \rightarrow \mathcal{Y}\]</span>。 我们称这个函数为一个<strong>预测器</strong> (<em>predictor</em>)，或是<strong>假设</strong> (<em>hypothesis</em>)，或是<strong>分类器</strong> (<em>classifier</em>)。 这个预测器可以用来标记新样本。在本例中，预测器可以用来标记市场上的木瓜是否味美。 根据训练数据，学习者可以构造某种学习算法来得到一个预测器。</p>
+</div>
+<div class="section level4">
+<h4>数据生成模型</h4>
+<p>首先，我们假定样本来自于某个概率分布<span class="math inline">\(\mathcal{D}\)</span>。 在本例中，学习者对<span class="math inline">\(\mathcal{D}\)</span><em>一无所知</em>，并且<span class="math inline">\(\mathcal{D}\)</span>可以是任意的概率分布。 在本例中，我们假设有一个“正确”的预测器 <span class="math inline">\(f\)</span>。 我们也称 <span class="math inline">\(f\)</span>为<strong>目标预测器</strong>，或<strong>目标函数</strong> (<em>target function</em>)，或<strong>目标假设</strong> (<em>target hypothesis</em>)。 预测器<span class="math inline">\(f\)</span>对于学习者来说也是未知的。事实上，学习者梦寐以求的正是这个预测器。 总的说来，<span class="math inline">\(S\)</span>中的任意一个样例<span class="math inline">\(\left(x_i,y_i\right)\)</span>是这样产生的：</p>
+<ol style="list-style-type: decimal">
+<li>按照<span class="math inline">\(\mathcal{D}\)</span>抽样产生一个样本<span class="math inline">\(x_i\)</span>；</li>
+<li>用正确的预测器来标记<span class="math inline">\(x_i\)</span>，即<span class="math inline">\(y_i=f(x_i)\)</span>.</li>
+</ol>
+</div>
+<div class="section level4">
+<h4>成效</h4>
+<p>学习者通过对训练数据的学习，生成一个预测器<span class="math inline">\(h\)</span>后，怎么来评判这个预测器的好坏呢？ 一个顺理成章的标准是判断这个预测器犯错误的概率的大小。数学上，我们可以表示为： <span class="math display">\[
+\begin{aligned}
+L_{(\mathcal{D},\;f)}(h)  :=  \mathbb P_{x \sim \mathcal{D}}\left[h(x) \neq f(x)\right],
+\end{aligned}
+\]</span> 或 <span class="math display">\[
+\begin{aligned}
+L_{(\mathcal{D},\;f)}(h)  :=   \mathcal{D}\left(\left\{x:h(x) \neq f(x)\right\}\right).
+\end{aligned}
+\]</span> 我们称<span class="math inline">\(L_{(\mathcal{D},\;f)}(h)\)</span>为<strong>预测误差</strong> (<em>error of a predictor</em>, or <em>error of a classifier</em>, or <em>generalization error</em>, or <em>risk</em>, or <em>true error</em>)。 注意<span class="math inline">\(L_{(\mathcal{D},\;f)}(h)\)</span>中的下标 <span class="math inline">\(\mathcal{D},f\)</span> 表示这个预测错误的度量 (measure) 是基于样本分布<span class="math inline">\(\mathcal{D}\)</span>及正确的预测器<span class="math inline">\(f\)</span>。 如果上下文的语境中 <span class="math inline">\(\mathcal{D},f\)</span> 很清楚的话，我们有时为简洁的缘故会省略掉下标。 <!-- When print in Rmarkdown, change align to aligned, and delete \tag{1} --></p>
+</div>
+<div class="section level4">
+<h4>思考和练习</h4>
+<ol style="list-style-type: decimal">
+<li>在本例中，输入、输出、和数据生成模型分别是什么？</li>
+<li>学习者所拥有的信息是什么？ <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
+</ol>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>示例和样例的区别是什么，他们对应的英文单词分别是什么？<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>简单说来，学习者所有信息就是训练数据<span class="math inline">\(S\)</span>。在本例中，最初，学习者不知道木瓜颜色和柔软度的概率分布，也不知道具有某种颜色和某种柔软度的木瓜口味如何。学习者对木瓜的了解来源于<span class="math inline">\(S\)</span>。<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
