@@ -19,7 +19,7 @@ footnotereturnlinkcontents = "↩"
     weight = 1
 [[menu.main]]
     name = "机器学习"
-    url = "/series/ml/"
+    url = "/ml/"
     weight = 5
 [[menu.main]]
     name = "简历"
