@@ -1,6 +1,8 @@
 ---
 date: 2017-05-24 7:00:00
 title: "1.2 我们在什么情况下需要机器学习"
+author: "甘湘华"
+show_toc: true
 series: [ML]
 categories: [MLF01]
 tags: []

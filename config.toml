@@ -49,4 +49,8 @@ footnotereturnlinkcontents = "↩"
     width = 50
     height = 50
     alt = "Logo"
+    [author]
+      post = "甘湘华"
 
+    [blackfriday]
+      extensionsmask = ["noIntraEmphasis"]
