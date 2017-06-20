@@ -1,6 +1,6 @@
 baseurl = "https://sierxue.netlify.com/"
 relativeurls = true
-languageCode = "en-us"
+languageCode = "cn-zh"
 title = "甘湘华 | Xianghua Gan"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
@@ -14,27 +14,35 @@ footnotereturnlinkcontents = "↩"
     post = ":slug/"
 
 [[menu.main]]
-    name = "简历"
-    url = "/about/"
-    weight = 1
-[[menu.main]]
     name = "博客"
     url = "/post/"
+    weight = 1
 [[menu.main]]
     name = "机器学习"
     url = "/series/ml/"
+    weight = 5
 [[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/rstudio"
+    name = "简历"
+    url = "/about/"
+    weight = 9
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "甘湘华的个人网站; Personal website of Xianghua Gan"
+    fullURL = "/"
+    customCSS = ["css/custom.css"]
+    customJS = ["js/center-img.js", "js/right-quote.js", "js/no-highlight.js", "js/fix-footnote.js"]
+    githubContentURL = ""
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
     highlightjsCDN = "//cdn.bootcss.com"
     highlightjsLang = ["r", "yaml"]
     highlightjsTheme = "github"
+    
+    [social]
+      weibo = ""
+      weibo_url = ""
+      github = "sierxue"
 
     [taxonomies]
       tag = "tags"
@@ -48,9 +56,14 @@ footnotereturnlinkcontents = "↩"
     url = "logo.png"
     width = 50
     height = 50
-    alt = "Logo"
+    alt = "甘湘华 Xianghua Gan"
+    
     [author]
       post = "甘湘华"
+
+    [lang]
+      [edit]
+        post = "编辑本页"
 
     [blackfriday]
       extensionsmask = ["noIntraEmphasis"]
