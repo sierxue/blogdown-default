@@ -1,21 +1,28 @@
-baseurl = "/"
+baseurl = "https://sierxue.netlify.com/"
 relativeurls = true
 languageCode = "en-us"
-title = "A Hugo website"
+title = "甘湘华 | Xianghua Gan"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+hasCJKLanguage = true
+enableEmoji = true
+footnotereturnlinkcontents = "↩"
 
 [permalinks]
-    post = "/:year/:month/:day/:slug/"
+    post = ":slug/"
 
 [[menu.main]]
-    name = "关于"
+    name = "简历"
     url = "/about/"
+    weight = 1
 [[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/rstudio/blogdown"
+    name = "博客"
+    url = "/post/"
+[[menu.main]]
+    name = "机器学习"
+    url = "/series/ml/"
 [[menu.main]]
     name = "Twitter"
     url = "https://twitter.com/rstudio"
@@ -28,6 +35,11 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
     highlightjsCDN = "//cdn.bootcss.com"
     highlightjsLang = ["r", "yaml"]
     highlightjsTheme = "github"
+
+    [taxonomies]
+      tag = "tags"
+      category = "categories"
+      series = "series"
 
     MathJaxCDN = "//cdn.bootcss.com"
     MathJaxVersion = "2.7.1"
