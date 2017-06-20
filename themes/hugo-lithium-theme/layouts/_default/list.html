@@ -46,6 +46,16 @@
         {{ end }}
       {{ end }}
 	{{ end }}
+	{{ if eq .Section "" }}
+	  {{ range .Data.Pages.ByTitle }}
+		<article class="archive-item">
+		<a href="{{ .Permalink }}" class="archive-item-link">{{ .Title }}</a>
+		<span class="archive-item-date">
+        {{ .Date.Format "2006/01/02" }}
+		</span>
+		</article>
+	  {{ end }}
+	{{ end }}
   </div>
   {{ end }}
   {{if and .Content (not .IsHome) }}
